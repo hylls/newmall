@@ -14,6 +14,8 @@ export default {
 
 <style>
   .nav-bar {
+    /* position: absolute;
+    top: 0; */
     display: flex;
     height: 44px;
     line-height: 44px;
