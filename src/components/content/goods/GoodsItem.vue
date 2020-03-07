@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="itemClick">
     <!-- 给img添加一个监听事件imageLoad 用来检测请求数据之后图片是否加载完成 -->
     <img :src="goodsItem.show.img" alt="" @load="imageLoad">
     <div class="second-item">
@@ -25,6 +25,9 @@ export default {
     imageLoad() {
       // 当加载完成之后 就会发射这个事件itemImageLoad
       this.$bus.$emit('itemImageLoad');
+    },
+    itemClick() {
+      this.$router.push('/detail/' + this.goodsItem.iid)
     }
   },
 };

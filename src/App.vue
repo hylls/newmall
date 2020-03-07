@@ -1,16 +1,20 @@
 <template>
   <div id="app">
+    <keep-alive exclude="Detail">
+      <router-view></router-view>
+    </keep-alive>
     <main-tab-bar></main-tab-bar>
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import MainTabBar from './components/content/mainTabBar/MainTabBar'
+// import Detail from './views/detail/Detail'
 export default {
   name: 'App',
   components: {
     MainTabBar,
+    // Detail
   }
 }
 </script>

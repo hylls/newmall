@@ -70,6 +70,7 @@ export default {
       isBackTop: false, //一开始让backTop消失, 等到下滑一定长度再出现
       tabControlOffsetTop: 0,
       isTabFixed: false,
+      saveY: 0,
     };
   },
   created() {
@@ -79,10 +80,7 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
-    
     // this.$refs.scroll.scroll.refresh();
-    
-    
   },
   mounted() {
     // const refresh = this.debounce(this.$refs.scroll.scroll.refresh, 500)
@@ -92,6 +90,17 @@ export default {
       // 创造完组件之后就立马更新可滚动距离
       refresh();
     })
+  },
+  destroyed() {
+    console.log('销毁');
+  },
+  activated() {
+    // 当活跃时 立马调用此方法
+    this.$refs.scroll.scrollTo(0, this.saveY, 0);
+    this.$refs.scroll.refresh();
+  },
+  deactivated() { // 不活跃时 把scroll.y的值赋值给saveY 此为调用scroll组件里面的getSaveY方法
+    this.saveY = this.$refs.scroll.getSaveY();
   },
   computed: {
     // 把请求的数据给Goods组件
@@ -172,20 +181,20 @@ export default {
       getHomeGoods(type, page)
         .then(res => {
           this.goods[type].list.push(...res.data.data.list);
-          // console.log(this.goods[type].list);
+          // console.log(res);
           this.goods[type].page += 1;
           this.$refs.scroll.finishPullUp(); //完成上拉加载更多
         })
         .catch(err => {});
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
-#home {
-  /* padding-top: 44px; */
-}
+/* #home {
+  padding-top: 44px;
+} */
 .home-nav {
   /* position: fixed;
   top: 0;

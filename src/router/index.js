@@ -5,6 +5,7 @@ const Home = () => import('../views/home/Home.vue')
 const Category = () => import('../views/category/Category.vue')
 const Shopcart = () => import('../views/shopcart/Shopcart.vue')
 const Profile = () => import('../views/profile/Profile.vue')
+const Detail = () => import('../views/detail/Detail.vue')
 
 Vue.use(Router)
 const router = new Router({
@@ -29,6 +30,10 @@ const router = new Router({
       path: '/profile',
       component: Profile
     },
+    {
+      path: '/detail/:iid',
+      component: Detail
+    }
   ],
   mode: 'history'
 })

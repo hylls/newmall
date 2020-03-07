@@ -56,9 +56,12 @@ export default {
     },
     // 重新计算可滚动距离
     refresh() {
-      console.log('asdhabda');
-      
+      console.log('重新计算距离-refresh');
       this.scroll.refresh();
+    },
+    // 当用户离开页面时 获取当前的scroll.y的值
+    getSaveY() {
+      return this.scroll ? this.scroll.y : 0;
     }
   }
 };
